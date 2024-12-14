@@ -4,12 +4,14 @@
 #include <stdbool.h>
 #include "stm32f1xx_hal_flash.h"
 #include "stm32f1xx_hal_flash_ex.h"
+#include <core_cm3.h>
+#include <shell.h>
 
 #define BUFFER_SIZE 2*1024 // 定义缓冲区大小
 
 uint32_t g_jump_init_flag __attribute__((at(0x20000000), zero_init)); 
 
-inline void soft_reset_system(void)
+void soft_reset_system(void)
 {
     NVIC_SystemReset();
 }
@@ -62,13 +64,7 @@ void* app_address;
 
 RingBuffer myBuffer;
 
-// 初始化boot
-void myboot_init(UART_HandleTypeDef* uart)
-{
-    g_uart = uart;
-    
-    BufferInit(&myBuffer);
-}
+
 
 uint8_t buf[16];
 uint8_t len_buf[8];
@@ -82,9 +78,50 @@ void jump_to_app(const void* app_addr)
 
 }
 
+Shell g_shell;
+char g_shell_buffer[512];
+/**
+ * @brief shell读取数据函数原型
+ *
+ * @param data shell读取的字符
+ * @param len 请求读取的字符数量
+ *
+ * @return unsigned short 实际读取到的字符数量
+ */
+short shell_read(char *data, unsigned short len)
+{
+    return 1;
+}
+/**
+ * @brief shell写数据函数原型
+ *
+ * @param data 需写的字符数据
+ * @param len 需要写入的字符数
+ *
+ * @return unsigned short 实际写入的字符数量
+ */
+short shell_write(char *data, unsigned short len)
+{
+    return 1;
+}
+
+// 初始化boot
+void myboot_init(UART_HandleTypeDef* uart)
+{
+    g_uart = uart;
+    
+    BufferInit(&myBuffer);
+    
+    g_shell.read = shell_read;
+    g_shell.write = shell_write;
+    shellInit(&g_shell, g_shell_buffer, 512);
+}
+
 // boot循环
 void myboot_loop(void)
 {
+    shellTask(NULL);
+    
     
     download_flag = 0;
     // 开始接收数据
