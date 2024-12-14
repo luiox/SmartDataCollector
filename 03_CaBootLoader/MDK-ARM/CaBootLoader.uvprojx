@@ -507,17 +507,7 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Src</GroupName>
-          <Files>
-            <File>
-              <FileName>mybootloader.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Src\mybootloader.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>letter-shell</GroupName>
+          <GroupName>ThirdParty/letter-shell</GroupName>
           <Files>
             <File>
               <FileName>shell.c</FileName>
@@ -538,6 +528,16 @@
               <FileName>shell_ext.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\ThirdParty\letter-shell\src\shell_ext.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Src</GroupName>
+          <Files>
+            <File>
+              <FileName>mybootloader.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\mybootloader.c</FilePath>
             </File>
           </Files>
         </Group>
