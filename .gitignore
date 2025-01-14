@@ -60,6 +60,7 @@ dkms.conf
 03_CaBootLoader/MDK-ARM/*.lst
 03_CaBootLoader/MDK-ARM/CaBootLoader.uvguix.*
 03_CaBootLoader/MDK-ARM/DebugConfig/
+03_CaBootLoader/.cmsis/
 
 04_CaApp/MDK-ARM/CaApp/*.htm
 04_CaApp/MDK-ARM/CaApp/*.crf

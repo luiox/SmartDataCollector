@@ -535,9 +535,24 @@
           <GroupName>Src</GroupName>
           <Files>
             <File>
-              <FileName>mybootloader.c</FileName>
+              <FileName>my_bootloader.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Src\mybootloader.c</FilePath>
+              <FilePath>..\Src\my_bootloader.c</FilePath>
+            </File>
+            <File>
+              <FileName>my_iap.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\my_iap.c</FilePath>
+            </File>
+            <File>
+              <FileName>my_shell.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\my_shell.c</FilePath>
+            </File>
+            <File>
+              <FileName>my_ymodem.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\my_ymodem.c</FilePath>
             </File>
           </Files>
         </Group>
