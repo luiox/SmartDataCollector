@@ -89,6 +89,8 @@ void myboot_init(UART_HandleTypeDef* uart)
     
     
     my_shell_init(uart);
+
+     __HAL_UART_ENABLE_IT(&huart1, UART_IT_RXNE);
 }
 
 // boot循环

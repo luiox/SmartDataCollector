@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "my_shell.h"
+#include "main.h"
 
 char shellBuffer[512];
 void* g_huart;
@@ -18,9 +19,8 @@ Shell shell;
  */
 short shellRead(char *data, unsigned short len)
 {
-    
-    
-    return 1;
+    HAL_UART_Receive(g_huart, (uint8_t *)data, len, HAL_MAX_DELAY);
+    return len;
 }
 /**
  * @brief shell写数据函数原型
@@ -32,9 +32,9 @@ short shellRead(char *data, unsigned short len)
  */
 short shellWrite(char *data, unsigned short len)
 {
-    
-    
-    return 1;
+    HAL_UART_Transmit(g_huart, (uint8_t *)data, len, HAL_MAX_DELAY);
+
+    return len;
 }
 
 void my_shell_init(void* huart)
@@ -50,7 +50,7 @@ void my_shell_init(void* huart)
 
 // 电脑通过zmodem命令发送文件到单片机
 // 此函数负责参数解析和对应操作
-int shellSzCmdProc(int argc, char *argv[])
+int shell_sz_cmd_proc(int argc, char *argv[])
 {
     char buf[32];
     sprintf(buf,"argc=%d\n",argc);
@@ -58,7 +58,7 @@ int shellSzCmdProc(int argc, char *argv[])
     int len = strlen(buf);
     shellWrite(buf, len);
     
-    if(len < 2){
+    if(argc < 2){
         shellWrite("Usage: sz file.bin\n", strlen("Usage: sz file.bin\n"));
         return -1;
     }
@@ -68,4 +68,4 @@ int shellSzCmdProc(int argc, char *argv[])
     
     return 0;
 }
-SHELL_EXPORT_CMD(SHELL_CMD_PERMISSION(0)|SHELL_CMD_TYPE(SHELL_TYPE_CMD_MAIN), shellSzCmdProc, shellSzCmdProc, re);
+SHELL_EXPORT_CMD(SHELL_CMD_PERMISSION(0)|SHELL_CMD_TYPE(SHELL_TYPE_CMD_MAIN), sz, shell_sz_cmd_proc, receive file via ymodem);

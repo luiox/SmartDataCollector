@@ -116,8 +116,8 @@ void ymodem_recv_with_callback(ymodem_handle_t ymodem,
 
     // 3. 校验数据
     uint16_t crc = crc16(ym->packet_buf, ym->packet_size);
-    if(ym->packet_buf[ym->packet_size - 2] != (crc >> 8) || ym->packet_buf[ym->packet_size - 1] != (crc & 0xFF))
-    {
+    if(ym->packet_buf[ym->packet_size - 2] != (crc >> 8) 
+        || ym->packet_buf[ym->packet_size - 1] != (crc & 0xFF)) {
         ym->error_handler(YMODEM_ERROR_CRC);
         return;
     }

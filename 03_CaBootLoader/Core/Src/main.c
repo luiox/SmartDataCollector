@@ -26,7 +26,6 @@
 
 #include "my_bootloader.h"
 
-
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
